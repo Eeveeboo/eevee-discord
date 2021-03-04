@@ -223,15 +223,31 @@ var EeveeDiscordClient = /** @class */ (function (_super) {
             });
         }); };
         _this.getSlashCommands = function (guildID) { return __awaiter(_this, void 0, void 0, function () {
+            var c;
             var _a;
             return __generator(this, function (_b) {
-                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ guildID: guildID })];
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, ((_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ guildID: guildID }))];
+                    case 1:
+                        c = (_b.sent()) || [];
+                        if (!(c instanceof Array))
+                            c = [c];
+                        return [2 /*return*/, c];
+                }
             });
         }); };
         _this.getSlashCommand = function (commandID) { return __awaiter(_this, void 0, void 0, function () {
+            var c;
             var _a;
             return __generator(this, function (_b) {
-                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ commandID: commandID })];
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, ((_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ commandID: commandID }))];
+                    case 1:
+                        c = (_b.sent()) || [];
+                        if (!(c instanceof Array))
+                            c = [c];
+                        return [2 /*return*/, c];
+                }
             });
         }); };
         _this.token = token;
