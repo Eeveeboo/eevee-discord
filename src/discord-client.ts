@@ -214,7 +214,7 @@ class EeveeDiscordClient extends EventEmitter {
       });
   };
   public getSlashCommands = async (opts:{commandID?: string, guildID?: string}) => {
-    var c =
+    var c:ApplicationCommand[]|ApplicationCommand =
       (await this.slash_command_manager?.getCommands(opts).catch((e) => {
         if (e.response.status == 429) {
           return new Promise((done) => {
