@@ -201,8 +201,7 @@ var EeveeDiscordClient = /** @class */ (function (_super) {
                     interaction.token +
                     "/callback";
                 console.log(url);
-                axios_1.default.post(url, response).then(console.log).catch(console.error);
-                return [2 /*return*/];
+                return [2 /*return*/, axios_1.default.post(url, response)];
             });
         }); };
         _this.registerSlashCommand = function (command, guildId) { return __awaiter(_this, void 0, void 0, function () {

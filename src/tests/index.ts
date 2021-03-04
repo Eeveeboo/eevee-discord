@@ -26,11 +26,7 @@ client.on('ready',()=>{
 client.on('interaction',(i)=>{
     if(i.data?.name == "banannies"){
         client.respondToInteraction(i, {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content:
-              "🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌",
-          },
+          type: InteractionResponseType.AcknowledgeWithSource
         });
     }
     /*client.respondToInteraction(i, {

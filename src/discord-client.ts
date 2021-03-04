@@ -156,7 +156,7 @@ class EeveeDiscordClient extends EventEmitter {
       interaction.token +
       "/callback";
     console.log(url);
-    axios.post(url, response).then(console.log).catch(console.error);
+    return axios.post(url, response);
   };
   public registerSlashCommand = async (
     command: CreateApplicationCommand,

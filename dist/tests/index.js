@@ -25,10 +25,7 @@ client.on('interaction', function (i) {
     var _a;
     if (((_a = i.data) === null || _a === void 0 ? void 0 : _a.name) == "banannies") {
         client.respondToInteraction(i, {
-            type: discord_interfaces_1.InteractionResponseType.ChannelMessageWithSource,
-            data: {
-                content: "🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌\n🍌🍌🍌🍌🍌🍌🍌🍌",
-            },
+            type: discord_interfaces_1.InteractionResponseType.AcknowledgeWithSource
         });
     }
     /*client.respondToInteraction(i, {

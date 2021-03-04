@@ -24,7 +24,7 @@ declare class EeveeDiscordClient extends EventEmitter {
     respondToInteraction: (interaction: {
         id: string;
         token: string;
-    }, response: InteractionResponse) => Promise<void>;
+    }, response: InteractionResponse) => Promise<import("axios").AxiosResponse<any>>;
     registerSlashCommand: (command: CreateApplicationCommand, guildId?: string | undefined) => Promise<SlashCommands.ApplicationCommand | undefined>;
     modifySlashCommand: (command: CreateApplicationCommand, commandId: string, guildId?: string | undefined) => Promise<SlashCommands.ApplicationCommand | undefined>;
     unregisterSlashCommand: (commandId: string, guildId?: string | undefined) => Promise<boolean | undefined>;
