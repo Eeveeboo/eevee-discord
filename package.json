@@ -1,0 +1,26 @@
+{
+  "name": "eevee-discord-slash-commands",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "node dist/index.js",
+    "tsc-init": "tsc --init",
+    "build": "tsc",
+    "test": "ts-node src/tests/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/ws": "^7.4.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord-slash-commands-client": "^1.1.1",
+    "ws": "^7.4.3"
+  }
+}
