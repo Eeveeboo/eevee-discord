@@ -31,7 +31,7 @@ declare class EeveeDiscordClient extends EventEmitter {
     getSlashCommands: (opts: {
         commandID?: string;
         guildID?: string;
-    }) => Promise<unknown>;
+    }) => Promise<SlashCommands.ApplicationCommand[]>;
 }
 interface DiscordClientEvents {
     ready: (payload: DiscordReadyPayload_1) => void;
