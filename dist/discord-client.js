@@ -205,43 +205,77 @@ var EeveeDiscordClient = /** @class */ (function (_super) {
             });
         }); };
         _this.registerSlashCommand = function (command, guildId) { return __awaiter(_this, void 0, void 0, function () {
+            var _this = this;
             var _a;
             return __generator(this, function (_b) {
-                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.createCommand(command, guildId)];
+                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.createCommand(command, guildId).catch(function (e) {
+                        if (e.response.status == 429) {
+                            return new Promise(function (done) {
+                                setTimeout(function () {
+                                    done(_this.registerSlashCommand(command, guildId));
+                                }, e.response.data.retry_after * 1000);
+                            });
+                        }
+                        else {
+                            throw e;
+                        }
+                    })];
             });
         }); };
         _this.modifySlashCommand = function (command, commandId, guildId) { return __awaiter(_this, void 0, void 0, function () {
+            var _this = this;
             var _a;
             return __generator(this, function (_b) {
-                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.editCommand(command, commandId, guildId)];
+                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.editCommand(command, commandId, guildId).catch(function (e) {
+                        if (e.response.status == 429) {
+                            return new Promise(function (done) {
+                                setTimeout(function () {
+                                    done(_this.modifySlashCommand(command, commandId, guildId));
+                                }, e.response.data.retry_after * 1000);
+                            });
+                        }
+                        else {
+                            throw e;
+                        }
+                    })];
             });
         }); };
         _this.unregisterSlashCommand = function (commandId, guildId) { return __awaiter(_this, void 0, void 0, function () {
+            var _this = this;
             var _a;
             return __generator(this, function (_b) {
-                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.deleteCommand(commandId, guildId)];
+                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.deleteCommand(commandId, guildId).catch(function (e) {
+                        if (e.response.status == 429) {
+                            return new Promise(function (done) {
+                                setTimeout(function () {
+                                    done(_this.unregisterSlashCommand(commandId, guildId));
+                                }, e.response.data.retry_after * 1000);
+                            });
+                        }
+                        else {
+                            throw e;
+                        }
+                    })];
             });
         }); };
-        _this.getSlashCommands = function (guildID) { return __awaiter(_this, void 0, void 0, function () {
+        _this.getSlashCommands = function (opts) { return __awaiter(_this, void 0, void 0, function () {
             var c;
+            var _this = this;
             var _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, ((_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ guildID: guildID }))];
-                    case 1:
-                        c = (_b.sent()) || [];
-                        if (!(c instanceof Array))
-                            c = [c];
-                        return [2 /*return*/, c];
-                }
-            });
-        }); };
-        _this.getSlashCommand = function (commandID) { return __awaiter(_this, void 0, void 0, function () {
-            var c;
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0: return [4 /*yield*/, ((_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ commandID: commandID }))];
+                    case 0: return [4 /*yield*/, ((_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands(opts).catch(function (e) {
+                            if (e.response.status == 429) {
+                                return new Promise(function (done) {
+                                    setTimeout(function () {
+                                        done(_this.getSlashCommands(opts));
+                                    }, e.response.data.retry_after * 1000);
+                                });
+                            }
+                            else {
+                                throw e;
+                            }
+                        }))];
                     case 1:
                         c = (_b.sent()) || [];
                         if (!(c instanceof Array))

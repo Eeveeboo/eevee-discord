@@ -162,32 +162,70 @@ class EeveeDiscordClient extends EventEmitter {
     command: CreateApplicationCommand,
     guildId?: string
   ) => {
-    return this.slash_command_manager?.createCommand(<any>command, guildId);
+    return this.slash_command_manager
+      ?.createCommand(<any>command, guildId)
+      .catch((e) => {
+        if (e.response.status == 429) {
+          return new Promise((done) => {
+            setTimeout(() => {
+              done(this.registerSlashCommand(command, guildId));
+            }, e.response.data.retry_after * 1000);
+          });
+        } else {
+          throw e;
+        }
+      });
   };
   public modifySlashCommand = async (
     command: CreateApplicationCommand,
     commandId: string,
     guildId?: string
   ) => {
-    return this.slash_command_manager?.editCommand(
-      <any>command,
-      commandId,
-      guildId
-    );
+    return this.slash_command_manager
+      ?.editCommand(<any>command, commandId, guildId)
+      .catch((e) => {
+        if (e.response.status == 429) {
+          return new Promise((done) => {
+            setTimeout(() => {
+              done(this.modifySlashCommand(command, commandId, guildId));
+            }, e.response.data.retry_after * 1000);
+          });
+        } else {
+          throw e;
+        }
+      });
   };
   public unregisterSlashCommand = async (
     commandId: string,
     guildId?: string
   ) => {
-    return this.slash_command_manager?.deleteCommand(commandId, guildId);
+    return this.slash_command_manager
+      ?.deleteCommand(commandId, guildId)
+      .catch((e) => {
+        if (e.response.status == 429) {
+          return new Promise((done) => {
+            setTimeout(() => {
+              done(this.unregisterSlashCommand(commandId, guildId));
+            }, e.response.data.retry_after * 1000);
+          });
+        } else {
+          throw e;
+        }
+      });
   };
-  public getSlashCommands = async (guildID?: string) => {
-    var c = (await this.slash_command_manager?.getCommands({ guildID })) || [];
-    if(!(c instanceof Array)) c = [c];
-    return c;
-  };
-  public getSlashCommand = async (commandID?: string) => {
-    var c = (await this.slash_command_manager?.getCommands({ commandID })) || [];
+  public getSlashCommands = async (opts:{commandID?: string, guildID?: string}) => {
+    var c =
+      (await this.slash_command_manager?.getCommands(opts).catch((e) => {
+        if (e.response.status == 429) {
+          return new Promise((done) => {
+            setTimeout(() => {
+              done(this.getSlashCommands(opts));
+            }, e.response.data.retry_after * 1000);
+          });
+        } else {
+          throw e;
+        }
+      })) || [];
     if (!(c instanceof Array)) c = [c];
     return c;
   };
