@@ -28,8 +28,8 @@ declare class EeveeDiscordClient extends EventEmitter {
     registerSlashCommand: (command: CreateApplicationCommand, guildId?: string | undefined) => Promise<SlashCommands.ApplicationCommand | undefined>;
     modifySlashCommand: (command: CreateApplicationCommand, commandId: string, guildId?: string | undefined) => Promise<SlashCommands.ApplicationCommand | undefined>;
     unregisterSlashCommand: (commandId: string, guildId?: string | undefined) => Promise<boolean | undefined>;
-    getSlashCommands: (guildID?: string | undefined) => Promise<void>;
-    getSlashCommand: (commandID?: string | undefined) => Promise<void>;
+    getSlashCommands: (guildID?: string | undefined) => Promise<SlashCommands.ApplicationCommand | SlashCommands.ApplicationCommand[] | undefined>;
+    getSlashCommand: (commandID?: string | undefined) => Promise<SlashCommands.ApplicationCommand | SlashCommands.ApplicationCommand[] | undefined>;
 }
 interface DiscordClientEvents {
     ready: (payload: DiscordReadyPayload_1) => void;

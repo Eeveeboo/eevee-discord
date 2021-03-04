@@ -225,15 +225,13 @@ var EeveeDiscordClient = /** @class */ (function (_super) {
         _this.getSlashCommands = function (guildID) { return __awaiter(_this, void 0, void 0, function () {
             var _a;
             return __generator(this, function (_b) {
-                (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ guildID: guildID });
-                return [2 /*return*/];
+                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ guildID: guildID })];
             });
         }); };
         _this.getSlashCommand = function (commandID) { return __awaiter(_this, void 0, void 0, function () {
             var _a;
             return __generator(this, function (_b) {
-                (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ commandID: commandID });
-                return [2 /*return*/];
+                return [2 /*return*/, (_a = this.slash_command_manager) === null || _a === void 0 ? void 0 : _a.getCommands({ commandID: commandID })];
             });
         }); };
         _this.token = token;

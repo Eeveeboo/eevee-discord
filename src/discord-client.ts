@@ -182,10 +182,10 @@ class EeveeDiscordClient extends EventEmitter {
     return this.slash_command_manager?.deleteCommand(commandId, guildId);
   };
   public getSlashCommands = async (guildID?: string) => {
-    this.slash_command_manager?.getCommands({ guildID });
+    return this.slash_command_manager?.getCommands({ guildID });
   };
   public getSlashCommand = async (commandID?: string) => {
-    this.slash_command_manager?.getCommands({ commandID });
+    return this.slash_command_manager?.getCommands({ commandID });
   };
 }
 
