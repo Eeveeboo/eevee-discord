@@ -1,5 +1,4 @@
 name: github pages
-runs-on: self-hosted
 
 on:
   push:
