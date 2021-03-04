@@ -16,8 +16,22 @@ client.on('ready', function () {
     console.log(client.guilds);
     client.guilds.forEach(function (g) {
         client.registerSlashCommand({
-            name: "banannies",
-            description: "Creates a wall of bananas"
+            name: "base",
+            description: "Creates a wall of bananas",
+            options: [
+                {
+                    name: "arg1",
+                    description: "-",
+                    type: discord_interfaces_1.ApplicationCommandOptionType.STRING,
+                    required: true,
+                },
+                {
+                    name: "arg2",
+                    description: "-",
+                    type: discord_interfaces_1.ApplicationCommandOptionType.STRING,
+                    required: true,
+                },
+            ],
         }, g);
     });
 });

@@ -1,5 +1,5 @@
 import EeveeDiscordClient from '../discord-client';
-import { InteractionResponseType } from '../discord-interfaces';
+import { ApplicationCommandOptionType, InteractionResponseType } from '../discord-interfaces';
 const TOKEN = require('../../token.json');
 
 const client = new EeveeDiscordClient(TOKEN);
@@ -15,8 +15,22 @@ client.on('ready',()=>{
     client.guilds.forEach(g => {
         client.registerSlashCommand(
           {
-            name: "banannies",
-            description: "Creates a wall of bananas"
+            name: "base",
+            description: "Creates a wall of bananas",
+            options: [
+              {
+                name: "arg1",
+                description: "-",
+                type: ApplicationCommandOptionType.STRING,
+                required: true,
+              },
+              {
+                name: "arg2",
+                description: "-",
+                type: ApplicationCommandOptionType.STRING,
+                required: true,
+              },
+            ],
           },
           g
         );
