@@ -266,9 +266,9 @@ export interface ApplicationCommandInteractionData {
   /**
    * the params + values from the user
    *
-   * @type {[]}
+   * @type {ApplicationCommandInteractionDataOption[]}
    */
-  options: [];
+  options: ApplicationCommandInteractionDataOption[];
   /**
    * the name of the invoked command
    *
