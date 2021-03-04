@@ -3,7 +3,7 @@ import EventEmitter from "events";
 import axios from "axios";
 import {
   DiscordRawPayload,
-  DiscordHearbeatPayload_10,
+  DiscordHeartbeatPayload_10,
   DiscordReadyPayload_1,
   DiscordInvalidSessionPayload_9,
   User,
@@ -14,9 +14,8 @@ import {
 import SlashCommands, {
   ApplicationCommand,
 } from "discord-slash-commands-client";
-import { FunctionUtil } from "./lib/FunctionUtil";
 
-class EeveeDiscordClient extends EventEmitter {
+export class EeveeDiscordClient extends EventEmitter {
   public ready: boolean = false;
   public user: User | null = null;
   public guilds: string[] = [];
@@ -93,7 +92,7 @@ class EeveeDiscordClient extends EventEmitter {
     this.emit("raw", p);
     // Handle Heartbeat
     if (p.op == 10) {
-      var p10 = <DiscordHearbeatPayload_10>p;
+      var p10 = <DiscordHeartbeatPayload_10>p;
       clearInterval(this.heartbeat);
       this.heartbeat = <number>(
         (<any>setInterval(this._hearbeat_ack, p10.d.heartbeat_interval))
@@ -231,7 +230,7 @@ class EeveeDiscordClient extends EventEmitter {
   };
 }
 
-interface DiscordClientEvents {
+export interface DiscordClientEvents {
   ready: (payload: DiscordReadyPayload_1) => void;
   heartbeat: (heartbeat_interval: number) => void;
   "heartbeat-ack": () => void;
@@ -239,7 +238,7 @@ interface DiscordClientEvents {
   raw: (payload: DiscordRawPayload) => void;
   "raw-unhandled": (payload: DiscordRawPayload) => void;
 }
-declare interface EeveeDiscordClient {
+export declare interface EeveeDiscordClient {
   on<Event extends keyof DiscordClientEvents>(
     event: Event,
     listener: DiscordClientEvents[Event]
@@ -249,5 +248,3 @@ declare interface EeveeDiscordClient {
     ...args: Parameters<DiscordClientEvents[Event]>
   ): boolean;
 }
-
-export default EeveeDiscordClient;

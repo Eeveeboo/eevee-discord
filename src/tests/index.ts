@@ -1,5 +1,4 @@
-import EeveeDiscordClient from '../discord-client';
-import { ApplicationCommandOptionType, InteractionResponseType } from '../discord-interfaces';
+import EeveeDiscordClient, { ApplicationCommandOptionType, Interaction, InteractionResponseType } from '..';
 const TOKEN = require('../../token.json');
 
 const client = new EeveeDiscordClient(TOKEN);
@@ -12,7 +11,7 @@ const client = new EeveeDiscordClient(TOKEN);
 
 client.on('ready',()=>{
     console.log(client.guilds);
-    client.guilds.forEach(g => {
+    client.guilds.forEach((g:string) => {
         client.registerSlashCommand(
           {
             name: "base",
@@ -37,7 +36,7 @@ client.on('ready',()=>{
     });
 });
 
-client.on('interaction',(i)=>{
+client.on('interaction',(i:Interaction)=>{
     if(i.data?.name == "banannies"){
         client.respondToInteraction(i, {
           type: InteractionResponseType.AcknowledgeWithSource

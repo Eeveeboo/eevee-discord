@@ -12,7 +12,8 @@
     "build:windows": "rd /s /q dist & npm run tsc",
     "build:default": "rm -rf dist && npm run tsc",
     "test-lib": "ts-node src/tests/index.ts",
-    "prepare": "npm run build || yarn build"
+    "prepare": "npm run build || yarn build",
+    "typedoc": "typedoc"
   },
   "keywords": [],
   "author": "",

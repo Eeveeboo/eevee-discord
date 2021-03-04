@@ -1,5 +1,6 @@
 # Eevee Discord Client
 ### This library gives easy access to the raw discord gateway payloads and I recommend using it only to fill in for missing features
+Documentation is currently a WIP.
 ## Installation
 ```bash
 npm i eevee-discord

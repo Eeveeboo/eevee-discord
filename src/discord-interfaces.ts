@@ -5,7 +5,7 @@ export interface DiscordRawPayload<T = any> {
   op: number;
   d: T;
 }
-export interface DiscordHearbeatPayload_10 extends DiscordRawPayload {
+export interface DiscordHeartbeatPayload_10 extends DiscordRawPayload {
   op: 10;
   d: {
     heartbeat_interval: number;

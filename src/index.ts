@@ -1,3 +1,3 @@
-import EeveeDiscordClient from "./discord-client";
-
+import {EeveeDiscordClient} from "./discord-client";
 export default EeveeDiscordClient;
+export * from "./discord-interfaces";
