@@ -1,10 +1,19 @@
 # Eevee Discord Client
 ### This library gives easy access to the raw discord gateway payloads and I recommend using it only to fill in for missing features
-Documentation is currently a WIP.
+---
 ## Installation
 ```bash
 npm i eevee-discord
 ```
+---
+## Documentation
+
+Documentation is currently a WIP.
+
+
+You can see the current documentation on my [github pages](https://eeveeboo.github.io/eevee-discord/)
+
+---
 
 ## Basic Usage
 ```ts
@@ -56,6 +65,8 @@ eevee.on('raw', (payload)=>{
     
 });
 ```
-
+---
 ## Note from the Author
 This is a small library originally conceived for utilizing discord slash commands and potentially other functions in the discord API that haven't been exposed in popular libraries yet. In the future I do plan on making it more full featured and suited for stateless sharded bots where memory and raw speed are required.
+
+---
