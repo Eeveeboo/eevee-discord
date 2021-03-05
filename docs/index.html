@@ -61,9 +61,8 @@
 				<a href="#eevee-discord-client" id="eevee-discord-client" style="color: inherit; text-decoration: none;">
 					<h1>Eevee Discord Client</h1>
 				</a>
-				<a href="#this-library-gives-easy-access-to-the-raw-discord-gateway-payloads-and-i-recommend-using-it-only-to-fill-in-for-missing-features" id="this-library-gives-easy-access-to-the-raw-discord-gateway-payloads-and-i-recommend-using-it-only-to-fill-in-for-missing-features" style="color: inherit; text-decoration: none;">
-					<h3>This library gives easy access to the raw discord gateway payloads and I recommend using it only to fill in for missing features</h3>
-				</a>
+				<p>This library gives easy access to the raw discord gateway payloads and I recommend using it only to fill in for missing features</p>
+				<p>This library is split into featuresets so that you only import the features you need.</p>
 				<hr>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
@@ -80,49 +79,29 @@
 				<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
 					<h2>Basic Usage</h2>
 				</a>
-				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">EeveeDiscordClient</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #001080">ApplicationCommandOptionType</span>
-<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;eevee-discord&#039;</span><span style="color: #000000">;</span>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">EeveeCore</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">SlashCommands</span><span style="color: #000000">,</span>
+<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;eevee-discord&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">TOKEN</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;../token.json&#039;</span><span style="color: #000000">);</span>
 
-<span style="color: #008000">// Create a client</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eevee</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EeveeDiscordClient</span><span style="color: #000000">(</span>
-<span style="color: #000000">    </span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">.</span><span style="color: #0070C1">DISCORD_TOKEN</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #267F99">Number</span><span style="color: #000000">(</span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">.</span><span style="color: #0070C1">DISCORD_INTENTS</span><span style="color: #000000">)</span>
-<span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EeveeCore</span><span style="color: #000000">(</span><span style="color: #0070C1">TOKEN</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">slashCommands</span><span style="color: #000000"> = </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">register</span><span style="color: #000000">(</span><span style="color: #001080">SlashCommands</span><span style="color: #000000">);</span>
 
-<span style="color: #001080">eevee</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ready&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">payload</span><span style="color: #000000">)</span><span style="color: #0000FF">=&gt;</span><span style="color: #000000">{</span>
-<span style="color: #000000">    </span><span style="color: #008000">// Interactions are unavalible until the bot is &#039;ready&#039;</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">commands</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">eevee</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">getSlashCommands</span><span style="color: #000000">({});</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">if</span><span style="color: #000000">(!</span><span style="color: #001080">commands</span><span style="color: #000000">.</span><span style="color: #795E26">find</span><span style="color: #000000">(</span><span style="color: #001080">c</span><span style="color: #0000FF">=&gt;</span><span style="color: #001080">c</span><span style="color: #000000">.</span><span style="color: #001080">name</span><span style="color: #000000">==</span><span style="color: #A31515">&quot;thank&quot;</span><span style="color: #000000">))</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">eevee</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">registerSlashCommand</span><span style="color: #000000">(</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;thank&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">description:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Thank a user&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">options:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">                {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;user&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    </span><span style="color: #001080">description:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;User to thank&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #001080">ApplicationCommandOptionType</span><span style="color: #000000">.</span><span style="color: #0070C1">USER</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    </span><span style="color: #001080">required:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
-<span style="color: #000000">                },</span>
-<span style="color: #000000">                ],</span>
-<span style="color: #000000">            }</span>
-<span style="color: #000000">        );</span>
+<span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ready&#039;</span><span style="color: #000000">,()</span><span style="color: #0000FF">=&gt;</span><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #001080">guilds</span><span style="color: #000000">.</span><span style="color: #795E26">forEach</span><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #001080">g</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">slashCommands</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">          </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;command&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          </span><span style="color: #001080">description:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;description&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        </span><span style="color: #001080">g</span>
+<span style="color: #000000">      );</span>
+<span style="color: #000000">    });</span>
 <span style="color: #000000">});</span>
 
-<span style="color: #008000">// To handle clash command interactions specifically </span>
-<span style="color: #001080">eevee</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;interaction&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">interaction</span><span style="color: #000000">)</span><span style="color: #0000FF">=&gt;</span><span style="color: #000000">{</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">if</span><span style="color: #000000">(</span><span style="color: #001080">interaction</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">?.</span><span style="color: #001080">name</span><span style="color: #000000"> == </span><span style="color: #A31515">&quot;thank&quot;</span><span style="color: #000000">) </span>
-<span style="color: #000000">        </span><span style="color: #001080">eevee</span><span style="color: #000000">.</span><span style="color: #795E26">respondToInteraction</span><span style="color: #000000">(</span><span style="color: #001080">interaction</span><span style="color: #000000">, {</span>
-<span style="color: #000000">            </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #001080">InteractionResponseType</span><span style="color: #000000">.</span><span style="color: #001080">AcknowledgeWithSource</span><span style="color: #000000">,</span>
-<span style="color: #000000">            </span><span style="color: #001080">data:</span><span style="color: #000000">{</span>
-<span style="color: #000000">                </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">`&lt;@</span><span style="color: #0000FF">${</span><span style="color: #001080">i</span><span style="color: #000000FF">.</span><span style="color: #001080">user</span><span style="color: #000000FF">?.</span><span style="color: #001080">id</span><span style="color: #0000FF">}</span><span style="color: #A31515">&gt; thanks &lt;@</span><span style="color: #0000FF">${</span><span style="color: #001080">interaction</span><span style="color: #000000FF">.</span><span style="color: #001080">data</span><span style="color: #000000FF">?.</span><span style="color: #001080">options</span><span style="color: #000000FF">[</span><span style="color: #098658">0</span><span style="color: #000000FF">].</span><span style="color: #001080">value</span><span style="color: #0000FF">}</span><span style="color: #A31515">&gt; ♥`</span>
-<span style="color: #000000">            }</span>
-<span style="color: #000000">        });</span>
+<span style="color: #001080">slashCommands</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;interaction&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">i</span><span style="color: #000000">)</span><span style="color: #0000FF">=&gt;</span><span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #001080">slashCommands</span><span style="color: #000000">.</span><span style="color: #795E26">respond</span><span style="color: #000000">(</span><span style="color: #001080">i</span><span style="color: #000000">);</span>
 <span style="color: #000000">});</span>
-
 <span style="color: #008000">// To handle all raw packets</span>
 <span style="color: #001080">eevee</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;raw&#039;</span><span style="color: #000000">, (</span><span style="color: #001080">payload</span><span style="color: #000000">)</span><span style="color: #0000FF">=&gt;</span><span style="color: #000000">{</span>
 <span style="color: #000000">    </span>
@@ -156,6 +135,15 @@
 						<a href="enums/interactiontype.html" class="tsd-kind-icon">Interaction<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/eeveecore.html" class="tsd-kind-icon">Eevee<wbr>Core</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/feature.html" class="tsd-kind-icon">Feature</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/slashcommands.html" class="tsd-kind-icon">Slash<wbr>Commands</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/default.html" class="tsd-kind-icon">default</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -178,6 +166,9 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/createapplicationcommand.html" class="tsd-kind-icon">Create<wbr>Application<wbr>Command</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/discordclientevents.html" class="tsd-kind-icon">Discord<wbr>Client<wbr>Events</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/discordheartbeatpayload_10.html" class="tsd-kind-icon">Discord<wbr>Heartbeat<wbr>Payload_<wbr>10</a>
@@ -210,6 +201,9 @@
 						<a href="interfaces/interactionresponse.html" class="tsd-kind-icon">Interaction<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/slashcommandevents.html" class="tsd-kind-icon">Slash<wbr>Command<wbr>Events</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/user.html" class="tsd-kind-icon">User</a>
 					</li>
 				</ul>
@@ -225,6 +219,11 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
