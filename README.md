@@ -1,5 +1,9 @@
 # Eevee Discord Client
-### This library gives easy access to the raw discord gateway payloads and I recommend using it only to fill in for missing features
+
+This library gives easy access to the raw discord gateway payloads and I recommend using it only to fill in for missing features
+
+This library is split into featuresets so that you only import the features you need.
+
 ---
 ## Installation
 ```bash
@@ -17,49 +21,29 @@ You can see the current documentation on my [github pages](https://eeveeboo.gith
 
 ## Basic Usage
 ```ts
-import EeveeDiscordClient {
-    ApplicationCommandOptionType
-} from 'eevee-discord';
+import EeveeCore, {
+  SlashCommands,
+} from "eevee-discord";
+const TOKEN = require('../token.json');
 
-// Create a client
-const eevee = new EeveeDiscordClient(
-    process.env.DISCORD_TOKEN,
-    Number(process.env.DISCORD_INTENTS)
-);
+const client = new EeveeCore(TOKEN);
+const slashCommands = client.register(SlashCommands);
 
-eevee.on('ready', async (payload)=>{
-    // Interactions are unavalible until the bot is 'ready'
-    var commands = await eevee
-    .getSlashCommands({});
-    if(!commands.find(c=>c.name=="thank"))
-        await eevee
-        .registerSlashCommand(
-            {
-                name: "thank",
-                description: "Thank a user",
-                options: [
-                {
-                    name: "user",
-                    description: "User to thank",
-                    type: ApplicationCommandOptionType.USER,
-                    required: true,
-                },
-                ],
-            }
-        );
+client.on('ready',()=>{
+    client.guilds.forEach(async g => {
+      await slashCommands.set(
+        {
+          name: "command",
+          description: "description",
+        },
+        g
+      );
+    });
 });
 
-// To handle clash command interactions specifically 
-eevee.on('interaction', (interaction)=>{
-    if(interaction.data?.name == "thank") 
-        eevee.respondToInteraction(interaction, {
-            type: InteractionResponseType.AcknowledgeWithSource,
-            data:{
-                content: `<@${i.user?.id}> thanks <@${interaction.data?.options[0].value}> ♥`
-            }
-        });
+slashCommands.on('interaction', (i)=>{
+  slashCommands.respond(i);
 });
-
 // To handle all raw packets
 eevee.on('raw', (payload)=>{
     

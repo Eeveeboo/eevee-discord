@@ -1,7 +1,7 @@
 {
   "name": "eevee-discord",
-  "version": "1.0.1",
-  "description": "A small library for utilizing discord slash commands and potentially other punctions in the discord API that haven't been exposed in popular libraries yet.",
+  "version": "1.1.1",
+  "description": "A small library for utilizing discord slash commands and potentially other functions in the discord API that haven't been exposed in popular libraries yet.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -13,7 +13,8 @@
     "build:default": "rm -rf dist && npm run tsc",
     "test-lib": "ts-node src/tests/index.ts",
     "prepare": "npm run build || yarn build",
-    "typedoc": "typedoc"
+    "typedoc": "typedoc",
+    "publish": "npm publish"
   },
   "keywords": [],
   "author": "",
@@ -29,9 +30,9 @@
     "type": "git",
     "url": "https://github.com/Eeveeboo/eevee-discord"
   },
+  "homepage": "https://eeveeboo.github.io/eevee-discord/",
   "dependencies": {
     "axios": "^0.21.1",
-    "discord-slash-commands-client": "^1.1.1",
     "ws": "^7.4.3"
   },
   "files": [

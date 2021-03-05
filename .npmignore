@@ -2,3 +2,8 @@ src
 tsconfig.json
 dist/tests
 docs
+.prettierrc
+typedoc.json
+.vscode
+.github
+tsconfig.tsbuildinfo
